@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "Property Rental Manager"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "auth": {
+    "login": "Sign in",
+    "email": "Email address",
+    "password": "Password"
+  }
+}

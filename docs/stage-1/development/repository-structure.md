@@ -13,6 +13,7 @@ core/
 ├── infra/
 │   ├── nginx/
 │   └── docker/
+│       └── compose.yaml
 ├── docs/
 │   ├── architecture/
 │   ├── api/
@@ -21,12 +22,13 @@ core/
 │   ├── development/
 │   └── requirements/
 ├── scripts/
+│   ├── db-up.sh
+│   ├── db-down.sh
+│   └── db-logs.sh
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   ├── pull_request_template.md
 │   └── workflows/
-├── compose.yaml
-├── compose.dev.yaml
 ├── .env.example
 ├── .editorconfig
 ├── .gitignore

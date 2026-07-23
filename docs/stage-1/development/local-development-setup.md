@@ -93,15 +93,31 @@ cd core
 
 Do not place credentials in the clone command, Git remote or committed files.
 
-## 5. Backend workflow
+## 5. Infrastructure and Backend workflow
+
+Start PostgreSQL database infrastructure using helper scripts from the repository root:
+
+```bash
+./scripts/db-up.sh
+# To view logs: ./scripts/db-logs.sh
+# To stop: ./scripts/db-down.sh
+```
+
+Alternatively, run Docker Compose manually from the repository root:
+
+```bash
+docker compose --env-file .env --file infra/docker/compose.yaml up -d
+```
+
+Docker Compose infrastructure is managed independently. Spring Boot Docker Compose integration is explicitly disabled (`spring.docker.compose.enabled=false`).
+
+Run the Spring Boot backend:
 
 ```bash
 cd ~/dev/property-rental-manager/core/backend
 ./mvnw clean verify
 ./mvnw spring-boot:run
 ```
-
-At Stage 1, the backend only needs to prove that the project builds and starts. PostgreSQL, Flyway and the final development profile belong to Stage 2 and later.
 
 ## 6. Frontend workflow
 
