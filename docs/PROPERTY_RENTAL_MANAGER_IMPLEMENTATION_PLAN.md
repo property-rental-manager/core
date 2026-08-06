@@ -316,20 +316,20 @@ property-rental-manager/
 
 ### Tasks
 
-- [ ] Create the repository.
-- [ ] Create the directory structure.
-- [ ] Configure `.gitignore`.
-- [ ] Configure `.editorconfig`.
-- [ ] Add `.env.example`.
-- [ ] Add README startup instructions.
-- [ ] Configure `main`, `develop` and feature branches.
-- [ ] Add issue templates.
-- [ ] Add pull-request template.
-- [ ] Configure basic CI.
-- [ ] Verify Java, Maven, Node.js, npm and Docker versions.
-- [ ] Configure IntelliJ for the backend.
-- [ ] Configure frontend editor tooling.
-- [ ] Add formatting and linting rules.
+- [x] Create the repository.
+- [x] Create the directory structure.
+- [x] Configure `.gitignore`.
+- [x] Configure `.editorconfig`.
+- [x] Add `.env.example`.
+- [x] Add README startup instructions.
+- [x] Configure `main`, `develop` and feature branches.
+- [x] Add issue templates.
+- [x] Add pull-request template.
+- [x] Configure basic CI.
+- [x] Verify Java, Maven, Node.js, npm and Docker versions.
+- [x] Configure IntelliJ for the backend.
+- [x] Configure frontend editor tooling.
+- [x] Add formatting and linting rules.
 
 ### Deliverables
 
@@ -354,18 +354,18 @@ Provide PostgreSQL, development containers and versioned database migrations.
 
 ### Tasks
 
-- [ ] Add PostgreSQL to Docker Compose.
-- [ ] Add database health check.
-- [ ] Configure persistent development volume.
-- [ ] Configure database environment variables.
-- [ ] Add optional Adminer or pgAdmin profile.
-- [ ] Configure Spring datasource.
-- [ ] Enable Flyway.
-- [ ] Set Hibernate `ddl-auto` to `validate`.
-- [ ] Add the first migration for identity tables.
-- [ ] Add database constraints and indexes.
-- [ ] Add migration validation tests.
-- [ ] Document database reset procedure.
+- [x] Add PostgreSQL to Docker Compose.
+- [x] Add database health check.
+- [x] Configure persistent development volume.
+- [x] Configure database environment variables.
+- [x] Add optional Adminer or pgAdmin profile.
+- [x] Configure Spring datasource.
+- [x] Enable Flyway.
+- [x] Set Hibernate `ddl-auto` to `validate`.
+- [x] Add the first migration for identity tables.
+- [x] Add database constraints and indexes.
+- [x] Add migration validation tests.
+- [x] Document database reset procedure.
 
 ### Planned migrations
 
@@ -425,21 +425,21 @@ pl.propertyrentalmanager
 
 ### Tasks
 
-- [ ] Create Spring Boot project.
-- [ ] Configure profiles: development, test, production.
-- [ ] Configure global exception handling.
-- [ ] Define a stable API error format.
-- [ ] Configure DTO validation.
-- [ ] Configure Jackson.
-- [ ] Add request ID handling.
-- [ ] Add structured logging.
-- [ ] Add OpenAPI and Swagger.
-- [ ] Add health endpoint.
-- [ ] Add common pagination response.
-- [ ] Add base auditing timestamps.
-- [ ] Configure application `Clock`.
-- [ ] Add Testcontainers for PostgreSQL integration tests.
-- [ ] Add base controller and service test patterns.
+- [x] Create Spring Boot project.
+- [x] Configure profiles: development, test, production.
+- [x] Configure global exception handling.
+- [x] Define a stable API error format.
+- [x] Configure DTO validation.
+- [x] Configure Jackson.
+- [x] Add request ID handling.
+- [x] Add structured logging.
+- [x] Add OpenAPI and Swagger.
+- [x] Add health endpoint.
+- [x] Add common pagination response.
+- [x] Add base auditing timestamps.
+- [x] Configure application `Clock`.
+- [x] Add Testcontainers for PostgreSQL integration tests.
+- [x] Add base controller and service test patterns.
 
 ### API error format
 
@@ -1523,6 +1523,11 @@ Use this template when starting each stage.
 | D-007 | 2026-07-23 | Notifications are in-app only for MVP | Accepted | Email notifications deferred |
 | D-008 | 2026-07-23 | Support Polish and English from the beginning | Accepted | Additional locales may be added later |
 | D-009 | 2026-07-23 | Support light and dark theme | Accepted | Theme preference may be persisted later |
+| D-010 | 2026-08-06 | Consolidate Compose file in `infra/docker/compose.dev.yaml` | Accepted | Standard dev environment location |
+| D-011 | 2026-08-06 | Use Flyway V1 for identity tables with Hibernate `validate` | Accepted | Flyway owns database schema |
+| D-012 | 2026-08-06 | Adopt mandatory stage documentation workflow policy | Accepted | Enforced via AGENTS.md and stage-documentation-checklist.md |
+| D-013 | 2026-08-06 | Standardize API error format (`ApiErrorResponse`) with MDC `requestId` | Accepted | Unified REST exception handling |
+| D-014 | 2026-08-06 | Inject central `Clock` bean for time operations | Accepted | Enables deterministic testing with `Clock.fixed` |
 
 ---
 
@@ -1531,6 +1536,9 @@ Use this template when starting each stage.
 | Date | Stage | Change | Result |
 |---|---:|---|---|
 | 2026-07-23 | Planning | Created implementation source-of-truth document | Ready to begin Stage 0 |
+| 2026-07-23 | Stage 1 | Established monorepo, tooling, `.gitignore`, `.env.example` | Stage 1 DONE |
+| 2026-08-06 | Stage 2 | PostgreSQL 17 Docker Compose, Adminer tools profile, Flyway V1 migration, Testcontainers tests, dev scripts, DB docs | Stage 2 DONE |
+| 2026-08-06 | Stage 3 | YAML profiles, ApiErrorResponse, GlobalExceptionHandler, RequestIdFilter, MDC logging, Jackson, OpenAPI, Actuator, PageResponse, BaseEntity JPA auditing, Clock bean, Testcontainers tests, AGENTS.md | Stage 3 DONE |
 
 ---
 
@@ -1538,6 +1546,6 @@ Use this template when starting each stage.
 
 The next action is:
 
-> **Begin Stage 0 — Finalize requirements and decisions.**
+> **Begin Stage 4 — Authentication foundation.**
 
-Stage 0 should end with an approved `mvp-decisions.md` file and a confirmed backlog for Stage 1.
+Stage 4 will implement user authentication, password hashing, JWT token issue/refresh/revoke strategies, and `/api/v1/auth/login`.

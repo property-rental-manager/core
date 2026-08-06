@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/property_rental_manager}
+    username: ${SPRING_DATASOURCE_USERNAME:property_rental_manager}
+    password: ${SPRING_DATASOURCE_PASSWORD:local_development_password}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+logging:
+  level:
+    pl.propertyrentalmanager: DEBUG
+    org.springframework.web: INFO
