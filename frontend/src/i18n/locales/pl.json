@@ -1,15 +1,81 @@
 {
-  "app": {
-    "name": "Property Rental Manager"
-  },
   "common": {
+    "appName": "Property Rental Manager",
     "loading": "Ładowanie...",
     "save": "Zapisz",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "submit": "Wyślij",
+    "backToHome": "Powrót do strony głównej",
+    "logout": "Wyloguj się",
+    "profile": "Mój profil",
+    "dashboard": "Pulpit nawigacyjny",
+    "language": "Język",
+    "theme": "Motyw",
+    "light": "Jasny",
+    "dark": "Ciemny"
   },
   "auth": {
-    "login": "Zaloguj się",
+    "loginTitle": "Zaloguj się do systemu",
+    "loginSubtitle": "Zarządzanie nieruchomościami, umowami i fakturami",
+    "emailLabel": "Adres e-mail",
+    "emailPlaceholder": "jan.kowalski@example.com",
+    "passwordLabel": "Hasło",
+    "passwordPlaceholder": "Wpisz swoje hasło",
+    "loginButton": "Zaloguj się",
+    "loggingIn": "Logowanie...",
+    "loginFailed": "Nieprawidłowy adres e-mail lub hasło.",
+    "rateLimitError": "Zbyt wiele nieudanych prób logowania. Spróbuj ponownie za chwilę.",
+    "networkError": "Błąd połączenia z serwerem. Sprawdź swoje połączenie internetowe."
+  },
+  "navigation": {
+    "dashboard": "Pulpit",
+    "profile": "Profil",
+    "users": "Użytkownicy",
+    "properties": "Nieruchomości",
+    "tenancies": "Najmy",
+    "invoices": "Faktury"
+  },
+  "roles": {
+    "ADMIN": "Administrator",
+    "OWNER": "Właściciel nieruchomości",
+    "TENANT": "Najemca"
+  },
+  "userStatus": {
+    "ACTIVE": "Aktywne",
+    "INVITED": "Zaproszony",
+    "DISABLED": "Zablokowane"
+  },
+  "dashboard": {
+    "welcome": "Witaj, {{name}}!",
+    "roleSubtitle": "Jesteś zalogowany jako {{role}}.",
+    "adminNotice": "Moduł zarządzania użytkownikami i platformą zostanie wdrożony w Etapie 6.",
+    "ownerNotice": "Moduły zarządzania nieruchomościami, najemcami i fakturami zostaną wdrożone w Etapach 7-9.",
+    "tenantNotice": "Portal najemcy i podgląd rozliczeń zostaną wdrożone w Etapie 11."
+  },
+  "profile": {
+    "title": "Mój profil",
+    "accountDetails": "Dane konta",
     "email": "Adres e-mail",
-    "password": "Hasło"
+    "fullName": "Imię i nazwisko",
+    "roles": "Przypisane role",
+    "status": "Stan konta",
+    "preferredLocale": "Preferowany język",
+    "changePasswordTitle": "Zmiana hasła",
+    "currentPassword": "Aktualne hasło",
+    "newPassword": "Nowe hasło",
+    "confirmNewPassword": "Potwierdź nowe hasło",
+    "changePasswordButton": "Zmień hasło",
+    "passwordChangedSuccess": "Hasło zostało pomyślnie zmienione. Wymagane ponowne zalogowanie.",
+    "passwordMismatch": "Nowe hasła nie są identyczne.",
+    "passwordPolicyError": "Nowe hasło musi zawierać od 12 do 128 znaków i różnić się od aktualnego."
+  },
+  "errors": {
+    "403Title": "Brak dostępu (403)",
+    "403Message": "Nie posiadasz uprawnień do przeglądania tej zasobu.",
+    "404Title": "Strona nie została znaleziona (404)",
+    "404Message": "Szukana strona nie istnieje lub została przeniesiona.",
+    "genericTitle": "Wystąpił nieoczekiwany błąd",
+    "genericMessage": "Przepraszamy, wystąpił problem z działaniem aplikacji. Spróbuj odświeżyć stronę.",
+    "retry": "Spróbuj ponownie"
   }
 }

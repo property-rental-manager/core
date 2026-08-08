@@ -188,3 +188,22 @@ All error responses use the standard `ApiErrorResponse` format established in St
 - `REFRESH_TOKEN_REUSE_DETECTED` (401): Attempted reuse of a previously rotated refresh token; all family sessions revoked.
 - `RATE_LIMIT_EXCEEDED` (429): Exceeded 5 failed login attempts per 15 minutes. Includes `Retry-After` header.
 - `PASSWORD_POLICY_VIOLATION` (400): Password fails length rules (< 12 or > 128 chars) or matches current password.
+
+---
+
+## 5. Frontend Integration Strategy
+
+1. **Memory-Only Token Storage:**
+   The frontend `apiClient` stores the JWT access token strictly in JavaScript memory (`memoryAccessToken`). No token is ever written to `localStorage` or `sessionStorage`.
+
+2. **App Bootstrap & Session Restore:**
+   On application mount, `AuthProvider` initializes in `INITIALIZING` status and silently sends `POST /api/v1/auth/refresh` using `credentials: "include"`. If successful, the access token is populated into memory without requiring re-login.
+
+3. **Single-Flight Refresh Retry:**
+   When an API request receives HTTP 401, `apiClient` routes the request to a single-flight queue (`refreshSingleFlight()`). Concurrent 401 requests wait for the single refresh Promise to complete and retry once upon success.
+
+4. **CSRF Token Ingestion:**
+   Before cookie-authenticated calls (`POST /auth/refresh`, `POST /auth/logout`), `apiClient` invokes `GET /auth/csrf` and populates the `X-XSRF-TOKEN` request header.
+
+5. **Password Change & Revocation:**
+   Upon successful password change (`POST /api/v1/me/password`), the backend bumps `authVersion` and revokes all refresh sessions. The frontend clears memory token and Query cache, prompting re-authentication.

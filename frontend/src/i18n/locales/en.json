@@ -1,15 +1,81 @@
 {
-  "app": {
-    "name": "Property Rental Manager"
-  },
   "common": {
+    "appName": "Property Rental Manager",
     "loading": "Loading...",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "backToHome": "Back to Home",
+    "logout": "Log out",
+    "profile": "My Profile",
+    "dashboard": "Dashboard",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark"
   },
   "auth": {
-    "login": "Sign in",
+    "loginTitle": "Sign in to your account",
+    "loginSubtitle": "Manage properties, tenancies, and invoices",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "john.doe@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Sign in",
+    "loggingIn": "Signing in...",
+    "loginFailed": "Invalid email address or password.",
+    "rateLimitError": "Too many failed login attempts. Please try again later.",
+    "networkError": "Connection error with server. Please check your internet connection."
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "users": "Users",
+    "properties": "Properties",
+    "tenancies": "Tenancies",
+    "invoices": "Invoices"
+  },
+  "roles": {
+    "ADMIN": "Administrator",
+    "OWNER": "Property Owner",
+    "TENANT": "Tenant"
+  },
+  "userStatus": {
+    "ACTIVE": "Active",
+    "INVITED": "Invited",
+    "DISABLED": "Disabled"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}!",
+    "roleSubtitle": "You are signed in as {{role}}.",
+    "adminNotice": "User & Platform Administration modules will be implemented in Stage 6.",
+    "ownerNotice": "Property, Tenancy, and Invoice Management modules will be implemented in Stages 7-9.",
+    "tenantNotice": "Tenant Portal and Invoice visibility will be implemented in Stage 11."
+  },
+  "profile": {
+    "title": "My Profile",
+    "accountDetails": "Account Details",
     "email": "Email address",
-    "password": "Password"
+    "fullName": "Full name",
+    "roles": "Assigned roles",
+    "status": "Account status",
+    "preferredLocale": "Preferred language",
+    "changePasswordTitle": "Change Password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "changePasswordButton": "Change password",
+    "passwordChangedSuccess": "Password has been successfully changed. Re-login is required.",
+    "passwordMismatch": "New passwords do not match.",
+    "passwordPolicyError": "New password must be between 12 and 128 characters and differ from current password."
+  },
+  "errors": {
+    "403Title": "Access Denied (403)",
+    "403Message": "You do not have permission to access this resource.",
+    "404Title": "Page Not Found (404)",
+    "404Message": "The page you are looking for does not exist or has been moved.",
+    "genericTitle": "An unexpected error occurred",
+    "genericMessage": "We are sorry, an application error occurred. Please try refreshing the page.",
+    "retry": "Try Again"
   }
 }

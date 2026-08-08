@@ -225,7 +225,7 @@ docs: update implementation stage status
 | 2 | Local infrastructure and database foundation | `NOT_STARTED` | 1 |
 | 3 | Backend foundation | `NOT_STARTED` | 2 |
 | 4 | Authentication and authorization | `DONE` | 3 |
-| 5 | Frontend foundation | `NOT_STARTED` | 4 |
+| 5 | Frontend foundation | `DONE` | 4 |
 | 6 | User administration | `NOT_STARTED` | 4, 5 |
 | 7 | Property management | `NOT_STARTED` | 6 |
 | 8 | Tenancy management | `NOT_STARTED` | 7 |
@@ -568,24 +568,24 @@ src/
 
 ### Tasks
 
-- [ ] Create Vite React TypeScript project.
-- [ ] Configure TypeScript strict mode.
-- [ ] Configure linting and formatting.
-- [ ] Configure API client.
-- [ ] Implement token handling.
-- [ ] Implement auth provider.
-- [ ] Implement protected routes.
-- [ ] Implement role-aware routes.
-- [ ] Implement login page.
-- [ ] Implement dashboard layout.
-- [ ] Implement sidebar and mobile navigation.
-- [ ] Implement profile area.
-- [ ] Implement own-password change UI.
-- [ ] Implement 403, 404 and generic error pages.
-- [ ] Add Polish and English.
-- [ ] Add light and dark theme.
-- [ ] Add loading and empty states.
-- [ ] Add frontend tests for authentication.
+- [x] Create Vite React TypeScript project.
+- [x] Configure TypeScript strict mode.
+- [x] Configure linting and formatting.
+- [x] Configure API client.
+- [x] Implement token handling.
+- [x] Implement auth provider.
+- [x] Implement protected routes.
+- [x] Implement role-aware routes.
+- [x] Implement login page.
+- [x] Implement dashboard layout.
+- [x] Implement sidebar and mobile navigation.
+- [x] Implement profile area.
+- [x] Implement own-password change UI.
+- [x] Implement 403, 404 and generic error pages.
+- [x] Add Polish and English.
+- [x] Add light and dark theme.
+- [x] Add loading and empty states.
+- [x] Add frontend tests for authentication.
 
 ### Acceptance criteria
 
@@ -1508,19 +1508,19 @@ Use this template when starting each stage.
 - Acceptance criteria result:
 ```
 
-## Stage 4 execution record
+## Stage 5 execution record
 
-- Stage: Stage 4 — Authentication and authorization
+- Stage: Stage 5 — Frontend foundation
 - Status: DONE
 - Start date: 2026-08-08
 - Completion date: 2026-08-08
 - Branch: main
-- Main objective: Complete backend authentication, token management, rate limiting, self-service password change, admin bootstrap, and centralized permission foundation.
-- Decisions required: D-015, D-016, D-017, D-018, D-019
+- Main objective: Complete React 19 + TypeScript + Vite frontend architecture (`core/frontend/`), memory-only JWT access token handling, single-flight refresh queue, CSRF handling, AuthProvider, locale-aware React Router, TanStack Query, i18n PL/EN, Light/Dark theme design system, Login/Profile/Error pages, and Vitest test suite.
+- Decisions required: D-020
 - Blocking issues: None
-- Implemented items: Flyway V2 schema, UserEntity, RoleEntity, RefreshTokenEntity, AuthenticationEventEntity, BCrypt 12, JwtTokenProvider, RefreshTokenService, CookieCsrfTokenRepository, LoginRateLimiter, AdminBootstrapRunner, PermissionService, AuthController, MeController.
-- Tests added: JwtTokenProviderTest, PasswordPolicyValidatorTest, LoginRateLimiterTest, PermissionServiceTest, AuthSecurityIntegrationTest (44 total backend tests passing).
-- Documentation updated: docs/api/authentication.md, docs/security/authentication-and-tokens.md, docs/architecture/erd.md, docs/development/backend.md, .env.example, README.md, CHANGELOG.md.
+- Implemented items: `apiClient.ts`, `authApi.ts`, `AuthProvider.tsx`, `AuthContext.ts`, `useAuth.ts`, `ThemeProvider.tsx`, `ThemeContext.ts`, `useTheme.ts`, `i18n.ts` (PL/EN), `router.tsx`, `ProtectedRoute.tsx`, `RoleRoute.tsx`, `LocaleValidator.tsx`, `LoginPage.tsx`, `DashboardLayout.tsx`, `DashboardDispatcherPage.tsx`, `AdminDashboardPage.tsx`, `OwnerDashboardPage.tsx`, `TenantDashboardPage.tsx`, `ProfilePage.tsx`, `ForbiddenPage.tsx`, `NotFoundPage.tsx`, `GenericErrorPage.tsx`, UI components (`Button`, `Input`, `FormField`, `Card`, `Alert`, `Spinner`, `LanguageSwitcher`, `ThemeToggle`), `index.css` design system.
+- Tests added: `src/test/auth.test.tsx`, `src/test/routing.test.tsx` (11 Vitest tests passing; verified `npm run lint`, `npm run test`, and `npm run build`).
+- Documentation updated: `docs/development/frontend.md`, `docs/architecture/frontend-foundation.md`, `docs/api/authentication.md`, `README.md`, `CHANGELOG.md`.
 - Remaining issues: None
 - Acceptance criteria result: PASSED
 
@@ -1549,6 +1549,7 @@ Use this template when starting each stage.
 | D-017 | 2026-08-08 | Rotate refresh tokens on each refresh with pessimistic locking and revoke token family on reuse detection | Accepted | Strict session theft mitigation |
 | D-018 | 2026-08-08 | Use Double-Submit Cookie CSRF protection for cookie-based POST endpoints (`refresh`, `logout`) | Accepted | Protects cookie endpoints against CSRF attacks |
 | D-019 | 2026-08-08 | Use in-memory Caffeine rate limiter (5 failed attempts / 15 mins) returning HTTP 429 `RATE_LIMIT_EXCEEDED` with `Retry-After` | Accepted | Protects against login brute-force attacks |
+| D-020 | 2026-08-08 | Store JWT access tokens strictly in JavaScript memory and rely on HttpOnly refresh cookie for silent session bootstrap | Accepted | Eliminates token XSS exposure while preserving page refresh session recovery |
 
 ---
 
@@ -1561,6 +1562,7 @@ Use this template when starting each stage.
 | 2026-08-06 | Stage 2 | PostgreSQL 17 Docker Compose, Adminer tools profile, Flyway V1 migration, Testcontainers tests, dev scripts, DB docs | Stage 2 DONE |
 | 2026-08-06 | Stage 3 | YAML profiles, ApiErrorResponse, GlobalExceptionHandler, RequestIdFilter, MDC logging, Jackson, OpenAPI, Actuator, PageResponse, BaseEntity JPA auditing, Clock bean, Testcontainers tests, AGENTS.md | Stage 3 DONE |
 | 2026-08-08 | Stage 4 | Implemented V2 Flyway migration, BCrypt, AdminBootstrapRunner, JwtTokenProvider, RefreshTokenService with rotation & reuse detection, CookieCsrfTokenRepository, LoginRateLimiter, AuthenticationEventService, PermissionService, AuthController, MeController, and 44 unit/integration tests | Stage 4 DONE |
+| 2026-08-08 | Stage 5 | Implemented React 19 + TS frontend shell, memory-only token storage, single-flight refresh queue, CSRF double-submit header injection, AuthProvider, locale-aware React Router, TanStack Query, i18n PL/EN, Light/Dark themes, Login/Profile/Error pages, and 11 Vitest tests | Stage 5 DONE |
 
 ---
 
@@ -1568,6 +1570,6 @@ Use this template when starting each stage.
 
 The next action is:
 
-> **Begin Stage 5 — Frontend foundation.**
+> **Begin Stage 6 — User administration.**
 
-Stage 5 will build the React + TypeScript frontend shell, routing, API client, i18n, light/dark theme, and login screen connected to the Stage 4 authentication API.
+Stage 6 will allow administrators to manage platform users and roles (`ADMIN`, `OWNER`, `TENANT`), search and filter users, change statuses, and reset passwords via `/api/v1/admin/users`.

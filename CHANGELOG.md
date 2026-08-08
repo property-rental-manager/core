@@ -10,6 +10,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Stage 5 — Frontend Foundation:**
+  - Complete React 19 + TypeScript + Vite frontend architecture (`core/frontend/`).
+  - Central `apiClient.ts` with memory-only JWT access token storage (`memoryAccessToken`), CSRF double-submit header injection (`X-XSRF-TOKEN`), and single-flight 401 refresh queue retry mechanism (`refreshSingleFlight`).
+  - `AuthProvider.tsx` and `AuthContext.ts` managing `INITIALIZING`, `AUTHENTICATED`, `UNAUTHENTICATED` state transitions and silent session bootstrap on startup without login page flash.
+  - Locale-aware React Router (`router.tsx`) supporting PL (`/pl/...`) and EN (`/en/...`) routes with `ProtectedRoute` and `RoleRoute` guards.
+  - Multi-language support (`i18next`, `react-i18next`) with Polish and English dictionaries (`pl.json`, `en.json`) and `LanguageSwitcher` component.
+  - Light & Dark theme system (`ThemeProvider.tsx`, `useTheme.ts`) with CSS custom properties design tokens, glassmorphic cards, Google Inter/Outfit typography, micro-animations, and `ThemeToggle` component.
+  - Reusable UI component library (`Button`, `Input`, `FormField`, `Card`, `Alert`, `Spinner`).
+  - User interface screens:
+    - `LoginPage.tsx` with Zod validation, rate-limiting (429) & invalid credentials feedback.
+    - `DashboardLayout.tsx` with responsive desktop sidebar, mobile navigation drawer, topbar profile summary, language switcher, theme toggle, and logout button.
+    - Role-aware landing shells (`AdminDashboardPage`, `OwnerDashboardPage`, `TenantDashboardPage`) and multi-role context switcher (`DashboardDispatcherPage`).
+    - `ProfilePage.tsx` displaying user details from `/api/v1/me` and password change form (`POST /api/v1/me/password`).
+    - Standardized error pages: `ForbiddenPage` (403), `NotFoundPage` (404), and `GenericErrorPage` with React `ErrorBoundary`.
+  - Comprehensive Vitest test suite (`src/test/auth.test.tsx`, `src/test/routing.test.tsx`) covering 11 test scenarios for auth lifecycle, single-flight refresh, routing guards, 403, 404, i18n, and theme toggling.
+  - Comprehensive frontend documentation (`docs/development/frontend.md`, `docs/architecture/frontend-foundation.md`, updated `docs/api/authentication.md` and `README.md`).
+
 - **Stage 4 — Authentication and Authorization:**
   - Flyway `V2__create_auth_tables.sql` migration adding `auth_version` and `password_changed_at` to `users`, and creating `refresh_tokens` and `authentication_events` tables.
   - User and role mapping to database tables (`UserEntity`, `RoleEntity`, `RefreshTokenEntity`, `AuthenticationEventEntity`).
