@@ -224,7 +224,7 @@ docs: update implementation stage status
 | 1 | Repository and development environment | `NOT_STARTED` | 0 |
 | 2 | Local infrastructure and database foundation | `NOT_STARTED` | 1 |
 | 3 | Backend foundation | `NOT_STARTED` | 2 |
-| 4 | Authentication and authorization | `NOT_STARTED` | 3 |
+| 4 | Authentication and authorization | `DONE` | 3 |
 | 5 | Frontend foundation | `NOT_STARTED` | 4 |
 | 6 | User administration | `NOT_STARTED` | 4, 5 |
 | 7 | Property management | `NOT_STARTED` | 6 |
@@ -502,20 +502,20 @@ boolean canDownloadFile(UUID userId, UUID fileId);
 
 ### Tasks
 
-- [ ] Implement user and role entities.
-- [ ] Implement password hashing.
-- [ ] Implement JWT access token.
-- [ ] Decide and implement refresh-token strategy.
-- [ ] Implement authentication filter.
-- [ ] Implement `/me`.
-- [ ] Implement own-password change.
-- [ ] Block disabled users.
-- [ ] Record login history.
-- [ ] Add login rate limiting.
-- [ ] Implement `CurrentUser`.
-- [ ] Implement `PermissionService`.
-- [ ] Add authentication unit tests.
-- [ ] Add endpoint authorization tests.
+- [x] Implement user and role entities.
+- [x] Implement password hashing.
+- [x] Implement JWT access token.
+- [x] Decide and implement refresh-token strategy.
+- [x] Implement authentication filter.
+- [x] Implement `/me`.
+- [x] Implement own-password change.
+- [x] Block disabled users.
+- [x] Record login history.
+- [x] Add login rate limiting.
+- [x] Implement `CurrentUser`.
+- [x] Implement `PermissionService`.
+- [x] Add authentication unit tests.
+- [x] Add endpoint authorization tests.
 
 ### Acceptance criteria
 
@@ -1508,6 +1508,22 @@ Use this template when starting each stage.
 - Acceptance criteria result:
 ```
 
+## Stage 4 execution record
+
+- Stage: Stage 4 — Authentication and authorization
+- Status: DONE
+- Start date: 2026-08-08
+- Completion date: 2026-08-08
+- Branch: main
+- Main objective: Complete backend authentication, token management, rate limiting, self-service password change, admin bootstrap, and centralized permission foundation.
+- Decisions required: D-015, D-016, D-017, D-018, D-019
+- Blocking issues: None
+- Implemented items: Flyway V2 schema, UserEntity, RoleEntity, RefreshTokenEntity, AuthenticationEventEntity, BCrypt 12, JwtTokenProvider, RefreshTokenService, CookieCsrfTokenRepository, LoginRateLimiter, AdminBootstrapRunner, PermissionService, AuthController, MeController.
+- Tests added: JwtTokenProviderTest, PasswordPolicyValidatorTest, LoginRateLimiterTest, PermissionServiceTest, AuthSecurityIntegrationTest (44 total backend tests passing).
+- Documentation updated: docs/api/authentication.md, docs/security/authentication-and-tokens.md, docs/architecture/erd.md, docs/development/backend.md, .env.example, README.md, CHANGELOG.md.
+- Remaining issues: None
+- Acceptance criteria result: PASSED
+
 ---
 
 # 15. Decision log
@@ -1528,6 +1544,11 @@ Use this template when starting each stage.
 | D-012 | 2026-08-06 | Adopt mandatory stage documentation workflow policy | Accepted | Enforced via AGENTS.md and stage-documentation-checklist.md |
 | D-013 | 2026-08-06 | Standardize API error format (`ApiErrorResponse`) with MDC `requestId` | Accepted | Unified REST exception handling |
 | D-014 | 2026-08-06 | Inject central `Clock` bean for time operations | Accepted | Enables deterministic testing with `Clock.fixed` |
+| D-015 | 2026-08-08 | Use short-lived HMAC-SHA256 JWT access tokens (15 min TTL) carrying `sub`, `email`, `roles`, `authVersion`, `iss`, `aud` | Accepted | Stateless API authorization with global revocation support |
+| D-016 | 2026-08-08 | Use 256-bit secure random opaque refresh tokens stored as SHA-256 hashes in DB and passed in `HttpOnly`, `SameSite=Lax` cookies | Accepted | Session security without exposing plaintext tokens in DB |
+| D-017 | 2026-08-08 | Rotate refresh tokens on each refresh with pessimistic locking and revoke token family on reuse detection | Accepted | Strict session theft mitigation |
+| D-018 | 2026-08-08 | Use Double-Submit Cookie CSRF protection for cookie-based POST endpoints (`refresh`, `logout`) | Accepted | Protects cookie endpoints against CSRF attacks |
+| D-019 | 2026-08-08 | Use in-memory Caffeine rate limiter (5 failed attempts / 15 mins) returning HTTP 429 `RATE_LIMIT_EXCEEDED` with `Retry-After` | Accepted | Protects against login brute-force attacks |
 
 ---
 
@@ -1539,6 +1560,7 @@ Use this template when starting each stage.
 | 2026-07-23 | Stage 1 | Established monorepo, tooling, `.gitignore`, `.env.example` | Stage 1 DONE |
 | 2026-08-06 | Stage 2 | PostgreSQL 17 Docker Compose, Adminer tools profile, Flyway V1 migration, Testcontainers tests, dev scripts, DB docs | Stage 2 DONE |
 | 2026-08-06 | Stage 3 | YAML profiles, ApiErrorResponse, GlobalExceptionHandler, RequestIdFilter, MDC logging, Jackson, OpenAPI, Actuator, PageResponse, BaseEntity JPA auditing, Clock bean, Testcontainers tests, AGENTS.md | Stage 3 DONE |
+| 2026-08-08 | Stage 4 | Implemented V2 Flyway migration, BCrypt, AdminBootstrapRunner, JwtTokenProvider, RefreshTokenService with rotation & reuse detection, CookieCsrfTokenRepository, LoginRateLimiter, AuthenticationEventService, PermissionService, AuthController, MeController, and 44 unit/integration tests | Stage 4 DONE |
 
 ---
 
@@ -1546,6 +1568,6 @@ Use this template when starting each stage.
 
 The next action is:
 
-> **Begin Stage 4 — Authentication foundation.**
+> **Begin Stage 5 — Frontend foundation.**
 
-Stage 4 will implement user authentication, password hashing, JWT token issue/refresh/revoke strategies, and `/api/v1/auth/login`.
+Stage 5 will build the React + TypeScript frontend shell, routing, API client, i18n, light/dark theme, and login screen connected to the Stage 4 authentication API.

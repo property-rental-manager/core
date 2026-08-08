@@ -104,3 +104,60 @@ Integration tests use Testcontainers and run a real PostgreSQL container:
 cd backend
 ./mvnw test
 ```
+
+---
+
+## 8. Authentication & Admin Bootstrap
+
+### Initial Admin Bootstrap
+To bootstrap the initial administrator account on startup, pass the following environment variables or system properties:
+```bash
+APP_BOOTSTRAP_ADMIN_ENABLED=true \
+APP_BOOTSTRAP_ADMIN_EMAIL=admin@example.com \
+APP_BOOTSTRAP_ADMIN_PASSWORD=AdminPassword123! \
+./mvnw spring-boot:run -Dspring-boot.run.profiles=development
+```
+
+### Useful Authentication Curl Commands
+
+1. **Fetch CSRF Token:**
+   ```bash
+   curl -i -c /tmp/cookies.txt http://localhost:8080/api/v1/auth/csrf
+   ```
+
+2. **Login:**
+   ```bash
+   curl -i -b /tmp/cookies.txt -c /tmp/cookies.txt \
+     -H "Content-Type: application/json" \
+     -d '{"email":"admin@example.com","password":"AdminPassword123!"}' \
+     http://localhost:8080/api/v1/auth/login
+   ```
+
+3. **Get Current User Profile:**
+   ```bash
+   curl -i -H "Authorization: Bearer <accessToken>" \
+     http://localhost:8080/api/v1/me
+   ```
+
+4. **Rotate Refresh Token:**
+   ```bash
+   curl -i -b /tmp/cookies.txt -c /tmp/cookies.txt \
+     -H "X-XSRF-TOKEN: <csrfToken>" \
+     -X POST http://localhost:8080/api/v1/auth/refresh
+   ```
+
+5. **Change Password:**
+   ```bash
+   curl -i -H "Authorization: Bearer <accessToken>" \
+     -H "Content-Type: application/json" \
+     -d '{"currentPassword":"AdminPassword123!","newPassword":"NewSecurePassword123!"}' \
+     http://localhost:8080/api/v1/me/password
+   ```
+
+6. **Logout:**
+   ```bash
+   curl -i -b /tmp/cookies.txt -c /tmp/cookies.txt \
+     -H "X-XSRF-TOKEN: <csrfToken>" \
+     -X POST http://localhost:8080/api/v1/auth/logout
+   ```
+

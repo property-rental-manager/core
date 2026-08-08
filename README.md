@@ -60,5 +60,8 @@ core/
 - [Database Development Guide](file:///home/admsuliga/dev/property-manager/core/docs/development/database.md)
 - [Backend Development Guide](file:///home/admsuliga/dev/property-manager/core/docs/development/backend.md)
 - [Backend Foundation Architecture](file:///home/admsuliga/dev/property-manager/core/docs/architecture/backend-foundation.md)
+- [Authentication API Specification](file:///home/admsuliga/dev/property-manager/core/docs/api/authentication.md)
+- [Security Architecture — Auth & Tokens](file:///home/admsuliga/dev/property-manager/core/docs/security/authentication-and-tokens.md)
+- [Entity Relationship Diagram (ERD)](file:///home/admsuliga/dev/property-manager/core/docs/architecture/erd.md)
 - [Stage Documentation Checklist](file:///home/admsuliga/dev/property-manager/core/docs/process/stage-documentation-checklist.md)
 - [Repository Agent Rules (AGENTS.md)](file:///home/admsuliga/dev/property-manager/core/AGENTS.md)

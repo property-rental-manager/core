@@ -1,10 +1,17 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="PropertyRentalManagerBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="development" />
     <option name="ENABLE_JMX_AUTH" value="true" />
+    <envs>
+      <env name="APP_BOOTSTRAP_ADMIN_ENABLED" value="true" />
+      <env name="APP_BOOTSTRAP_ADMIN_EMAIL" value="admin@example.com" />
+      <env name="APP_BOOTSTRAP_ADMIN_PASSWORD" value="AdminPassword123!" />
+    </envs>
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
     <module name="property-rental-manager-backend" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="pl.propertyrentalmanager.PropertyRentalManagerBackendApplication" />
-    <option name="WORKING_DIRECTORY" value="file://$MODULE_WORKING_DIR$" />
+    <option name="VM_PARAMETERS" value="-Dspring.profiles.active=development" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/backend" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="pl.propertyrentalmanager.*" />
